@@ -29,7 +29,7 @@ echo "place_design" >> system.tcl
 echo "phys_opt_design" >> system.tcl
 echo "route_design" >> system.tcl
 echo "write_checkpoint final.dcp" >> system.tcl
-echo "write_bitstream system.bit" >> system.tcl
+#echo "write_bitstream system.bit" >> system.tcl
 echo "report_timing" >> system.tcl
 echo "report_timing_summary" >> system.tcl
 echo "report_utilization -hierarchical -file utilization_h.txt" >> system.tcl
