@@ -26,7 +26,7 @@ echo "set_property SEVERITY {Warning} [get_drc_checks UCIO-1]" >> system.tcl
 echo "set_property SEVERITY {Warning} [get_drc_checks NSTD-1]" >> system.tcl
 echo "opt_design" >> system.tcl
 echo "place_design" >> system.tcl
-echo "phys_opt_design" >> system.tcl
+echo "phys_opt_design -retime" >> system.tcl
 echo "route_design" >> system.tcl
 echo "write_checkpoint final.dcp" >> system.tcl
 #echo "write_bitstream system.bit" >> system.tcl
