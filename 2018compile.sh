@@ -19,8 +19,8 @@ cp $VERILOG_FILE $BUILDDIR
 cp $CONSTRAINT_FILE $BUILDDIR
 cd $BUILDDIR
 echo "read_verilog $VERILOG_BUILD_COPY" > system.tcl
-echo "synth_design -top top -part xc7z020clg484-1 -retiming" >> system.tcl
 echo "read_xdc $CONSTRAINT_BUILD_COPY" >> system.tcl
+echo "synth_design -top top -part xc7z020clg484-1 -retiming" >> system.tcl
 echo "set_property SEVERITY {Warning} [get_drc_checks UCIO-1]" >> system.tcl
 echo "set_property SEVERITY {Warning} [get_drc_checks NSTD-1]" >> system.tcl
 echo "opt_design" >> system.tcl
