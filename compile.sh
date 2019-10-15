@@ -1,5 +1,5 @@
 #!/bin/bash -x
-#echo "set_param synth.elaboration.rodinMoreOptions \"rt::set_parameter synRetiming true\"" >> system.tcl
+#./compile_scripts/compile.sh compile_scripts/map_s_4_pipelined.v compile_scripts/constraints_1.xdc build
 
 VERILOG_FILE=$1
 CONSTRAINT_FILE=$2
@@ -19,11 +19,11 @@ cp $VERILOG_FILE $BUILDDIR
 cp $CONSTRAINT_FILE $BUILDDIR
 cd $BUILDDIR
 echo "read_verilog $VERILOG_BUILD_COPY" > system.tcl
-echo "set_param synth.elaboration.rodinMoreOptions \"rt::set_parameter synRetiming true\"" >> system.tcl
-echo "synth_design -top top -part xc7z020clg484-1 -mode out_of_context" >> system.tcl
 echo "read_xdc $CONSTRAINT_BUILD_COPY" >> system.tcl
+echo "synth_design -top top -part xc7z020clg484-1 -retiming -mode out_of_context" >> system.tcl
 echo "set_property SEVERITY {Warning} [get_drc_checks UCIO-1]" >> system.tcl
 echo "set_property SEVERITY {Warning} [get_drc_checks NSTD-1]" >> system.tcl
+echo "read_xdc $CONSTRAINT_BUILD_COPY" >> system.tcl
 echo "opt_design" >> system.tcl
 echo "place_design" >> system.tcl
 echo "phys_opt_design -retime" >> system.tcl
@@ -35,6 +35,7 @@ echo "report_timing_summary" >> system.tcl
 echo "report_utilization -hierarchical -file utilization_h.txt" >> system.tcl
 echo "report_utilization -file utilization.txt" >> system.tcl
 vivado -mode batch -source 'system.tcl' -nojournal -log 'vivado.log' > /dev/null
+echo $BUILDDIR"/vivado.log"
 #bootgen -image $DIR/../axi/boot.bif -arch zynqmp -process_bitstream bin
 
 #cp system.bit.bin $OUTFILE
