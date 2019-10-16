@@ -31,12 +31,13 @@ echo "phys_opt_design -retime" >> system.tcl
 echo "route_design" >> system.tcl
 echo "write_checkpoint final.dcp" >> system.tcl
 #echo "write_bitstream system.bit" >> system.tcl
-echo "report_timing" >> system.tcl
-echo "report_timing_summary" >> system.tcl
+echo "report_timing -file timing.txt" >> system.tcl
+echo "report_timing_summary -file timing_summary.txt" >> system.tcl
 echo "report_utilization -hierarchical -file utilization_h.txt" >> system.tcl
 echo "report_utilization -file utilization.txt" >> system.tcl
 vivado -mode batch -source 'system.tcl' -nojournal -log 'vivado.log' > /dev/null
-echo $BUILDDIR"/vivado.log"
+echo $BUILDDIR"/vivado.log" 
+echo $BUILDDIR"/vivado.log" > $BUILDDIR/../last_builddir.log
 #bootgen -image $DIR/../axi/boot.bif -arch zynqmp -process_bitstream bin
 
 #cp system.bit.bin $OUTFILE
